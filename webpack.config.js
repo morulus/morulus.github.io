@@ -10,6 +10,7 @@ var autoprefixer = require('autoprefixer')({
 
 
 var postcssnested = require('postcss-nested');
+var postcsssimplevars = require('postcss-simple-vars');
 
 
 var postcssFor = require('postcss-for');
@@ -47,7 +48,7 @@ module.exports = {
     })
   ],
   postcss: function() {
-    return [autoprefixer, postcssnested, postcssFor];
+    return [postcsssimplevars, autoprefixer, postcssnested, postcssFor];
   },
   output: {
     path: path.resolve(__dirname, "./dist"),

@@ -2,6 +2,10 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,600,400&subset=latin,cyrillic);
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300);
 
+$linkColor: #29bb7a;
+$linkActiveColor: #39e297;
+$subscribeColor: #667180;
+
 body {
 	background-color:black;
 	padding:0px;
@@ -87,10 +91,10 @@ body {
 	-webkit-transform:translateY(-50%) translateX(-50%);
 	-ms-transform:translateY(-50%) translateX(-50%);
 	transform:translateY(-50%) translateX(-50%);
-	
+
 	color:white;
 	font-family: 'Lato', "Arial";
-	
+
 	display: box;
 	box-orient: horizontal;
 	box-align:center;
@@ -168,7 +172,7 @@ body {
 
 
 #screens .screen > article h3 {
-	color: #00429a;
+	color: $subscribeColor;
     font-family: 'Roboto Condensed', "Arial";
     font-size: 1.2em;
     font-weight: 100;
@@ -208,10 +212,10 @@ body {
 #screens .screen > article a {
 	text-decoration: none;
 	cursor:pointer;
-	color:#00429a;
+	color:$linkColor;
 	transition:color 0.34s ease;
 	&:hover {
-		color:rgb(66, 132, 218);
+		color:$linkActiveColor;
 	}
 }
 
@@ -260,7 +264,7 @@ body {
 		>a {
 			word-wrap: normal;
     		white-space: nowrap;
-    		color:#00429a;
+    		color:$linkColor;
     		&:hover {
 				color:rgb(66, 132, 218);
     		}
