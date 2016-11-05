@@ -2,7 +2,6 @@ import styles from './style.css';
 
 
 function polyRender(content, node) {
-  debugger;
   if ("string"===typeof content) {
     node.innerHTML = content;
   } else if (content instanceof HTMLElement) {
