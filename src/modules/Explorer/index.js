@@ -1,9 +1,10 @@
 const $last = Symbol();
 
 class UrlExplorer {
-  constructor(node, src) {
+  constructor(node, src, dispatch) {
     this.node = node;
     this.src = src;
+    this.providerDispatch = dispatch;
   }
 
   isDublicate(that) {
@@ -22,7 +23,13 @@ class UrlExplorer {
         iframe.style.border = 0;
         iframe.style.display = 'none';
         iframe.style.opacity = 0;
+        this.providerDispatch({
+          type: 'START_LOADING'
+        });
         $(iframe).one('load', () => {
+            this.providerDispatch({
+              type: 'END_LOADING'
+            });
             iframe.style.display = 'block';
             setTimeout(() => { iframe.style.opacity = 1; }, 500);
         });
@@ -30,6 +37,9 @@ class UrlExplorer {
         this.node.appendChild(iframe);
       break;
       case 'leave':
+        this.providerDispatch({
+          type: 'CANCEL_LOADING'
+        });
         $(iframe).unbind('load');
         requestAnimationFrame(() => {
           this.node.removeChild(this.iframe);
@@ -46,8 +56,8 @@ class UrlExplorer {
 
 
 export default function explorer(url) {
-  return function(node) {
-    var explorer = new UrlExplorer(node, url);
+  return function(screen) {
+    var explorer = new UrlExplorer(this.node[0], url, this.provider.dispatch.bind(this.provider));
 
     this.on('beforeEnter', ()=>{
       explorer.trottleDispatch({

@@ -5,14 +5,12 @@ var postcssnested = require('postcss-nested');
 var webpack = require('webpack');
 module.exports = {
 	entry: {
-		upper: './src/upper.js',
-		upper_1: './src/upper.js'
+		upper: './src/upper.js'
 	},
 	output: {
 		path: path.resolve("./"),
 		filename: 'upper.js',
 		libraryTarget: 'amd',
-		library: 'app',
 		publicPath: 'test'
 	},
 	module: {
@@ -60,5 +58,8 @@ module.exports = {
 		})
 	],
 	extensions: [],
+	externals: {
+		'ScorePanel': 'morulus/ScorePanel'
+	},
 	postcss: function postcssPlugins() { return [postcssimport, autoprefixer, postcssnested]; }
 };

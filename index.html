@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="screens" data-dirty>
-      <div style="background-image:url(assets/images/blackscreen-bg.jpg)" data-screen-x="4" data-screen-y="0" data-screens-page="" class="screen current">
+      <!-- <div style="background-image:url(assets/images/blackscreen-bg.jpg)" data-screen-x="4" data-screen-y="0" data-screens-page="" class="screen current">
         <article>
           <div class="screen-effect-fade">
             <h2>Vladimir Kalmykov</h2>
@@ -25,7 +25,7 @@
             </center>
           </div>
         </article>
-      </div>
+      </div> -->
       <!-- <div style="background-image:url(assets/images/ultra.jpg)" data-screens-x="2" data-screens-y="0" class="screen">
   			<article>
   				<center>
@@ -37,10 +37,23 @@
   				</center>
   			</article>
   		</div> -->
-     </div>
+    </div>
+    <div id="cover"></div>
   </body>
   <script>
-    var screens = new me.Widescreens(document.getElementById('screens'));
+
+    const screens = new me.Widescreens(document.getElementById('screens'));
+    vendor('morulus/ScorePanel', function(ScorePanel) {
+      var scorePanel = ReactDOM.render(React.createElement(ScorePanel, {
+        store: screens
+      }), document.getElementById("cover"));
+    });
+
+    window.screens = screens;
+
+    // Portfolio
+    screens.addScreen(4, 0, '/screens/start/start.js');
+
     // Portfolio
     screens.addScreen(4, 1, {
       html: '<article><div><h1>Portfolio</h1></div></article>'

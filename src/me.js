@@ -4,18 +4,39 @@ import './style/main.css';
 import Widget from '/Users/VladimirMorulus/WorkAreas/mahabra/morulus/brahmascreens/src/Widget.js';
 import layerCake from './modules/layerCake/index';
 import explorer from './modules/explorer/index';
+import ScorePanel from './modules/ScorePanel/index';
+import middlewares from './middlewares/score';
 
-Vendor.registerModule('layerCake', {
+Vendor.registerModule('morulus/layerCake', {
 	exports: layerCake
 });
-Vendor.registerModule('explorer', {
+
+Vendor.registerModule('morulus/explorer', {
 	exports: explorer
+});
+
+Vendor.registerModule('morulus/ScorePanel', {
+	exports: ScorePanel
 });
 
 // Side globals
 window.React = React;
 window.ReactDOM = ReactDOM;
 
+const defaultState = {
+	score: {
+		enabled: false,
+		loading: false,
+		title: 'Hello, World'
+	}
+}
+
+class Me extends Widget {
+	constructor(selector, config) {
+		super(selector, config, defaultState, middlewares);
+	}
+}
+
 export default {
-	Widescreens: Widget
+	Widescreens: Me
 }

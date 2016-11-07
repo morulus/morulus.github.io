@@ -46,6 +46,20 @@ export default function layerCake(config = {}) {
           polyRender.call(this, config[layer], store.dom[layer]);
         }
       });
+    },
+    onEnter: function() {
+      console.log('ENTER');
+      if (config.cover) {
+        this.provider.dispatch({
+          type: 'ASSIGN_SCORE',
+          data: config.cover
+        });
+      }
+    },
+    onLeave: function() {
+      this.provider.dispatch({
+        type: 'DISABLE_SCORE'
+      });
     }
   });
   return screenConfiguration;
