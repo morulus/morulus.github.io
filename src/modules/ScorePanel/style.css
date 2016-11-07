@@ -47,14 +47,17 @@
     padding: 0 16px;
     border-radius: 1px;
     margin-bottom: 4px;
-    margin-right: 5px;
+
     font-size: 1.3em;
     font-family: Roboto;
-    >div {
+    >* {
+      border:0;
+      outline:none;
       display: inline-block;
       vertical-align: top;
       min-height:50px;
       min-width:50px;
+      margin-right: 5px;
       >span {
         display: inline-block;
         vertical-align: top;

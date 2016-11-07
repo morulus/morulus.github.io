@@ -48,7 +48,6 @@ export default function layerCake(config = {}) {
       });
     },
     onEnter: function() {
-      console.log('ENTER');
       if (config.cover) {
         this.provider.dispatch({
           type: 'ASSIGN_SCORE',

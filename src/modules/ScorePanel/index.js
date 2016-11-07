@@ -1,7 +1,17 @@
 import styles from './style.css';
 import classnames from 'classnames';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
+
+function followLinkFactory(link) {
+  return function() {
+    // if (link.url) {
+    //   let win = window.open(link.url, '_blank');
+    //   win.focus();
+    // }
+  }
+}
+
 class ScorePanel extends Component {
   constructor(...args) {
     super(...args);
@@ -34,6 +44,17 @@ class ScorePanel extends Component {
       <div className="unvisibleOnVisible"><i className="fa fa-check"></i></div>
     </span>;
 
+    let links = [];
+    for (let prop in this.props.links) {
+      if (this.props.links.hasOwnProperty(prop)) {
+        links.push(<a key={prop} href={this.props.links[prop].url||'javascript:void(0)'} className={styles.standaloneIcon} onClick={followLinkFactory(this.props.links[prop])}><span><i className={classnames({
+          fa: true,
+          ['fa-'+prop]: true
+        })}></i></span></a>);
+      }
+    }
+
+
     return <div className={classnames({
       [styles.infoBlock]: true,
       [styles.effectVisible]: this.props.enabled
@@ -41,7 +62,7 @@ class ScorePanel extends Component {
       <div>
         <div className={styles.standaloneIcon}><span><i className="fa fa-th"></i></span></div>
         <div className={styles.title}>{this.props.title}{loadingCircle}</div>
-        <div className={styles.standaloneIcon}><span><i className="fa fa-twitter"></i></span></div>
+        {links}
       </div>
     </div>;
   }
@@ -55,7 +76,8 @@ function mapStateToProps(state) {
     dispos: state.currentScreen, // Current screen coords
     enabled: state.score.enabled,
     loading: state.score.loading,
-    title: state.score.title
+    title: state.score.title,
+    links: state.score.links||{}
   }
 }
 
