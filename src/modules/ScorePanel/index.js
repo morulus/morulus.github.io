@@ -50,6 +50,7 @@ class ScorePanel extends Component {
     </span>;
 
     let links = [];
+    if (this.props.enabled)
     for (let prop in this.props.links) {
       if (this.props.links.hasOwnProperty(prop)) {
         links.push(<a key={prop} href={this.props.links[prop].url||'javascript:void(0)'} className={styles.standaloneIcon} onClick={followLinkFactory(this.props.links[prop])}><span><i className={classnames({
@@ -71,8 +72,8 @@ class ScorePanel extends Component {
         })} onClick={this.props.togglePurview}><span><i className="fa fa-th"></i></span></a>
         <div className={classnames({
           [styles.title]: true,
-          [styles.effectVisiblePlanch]: Boolean(this.props.title),
-          [styles.effectInvisiblePlanch]: !Boolean(this.props.title),
+          [styles.effectVisiblePlanch]: Boolean(this.props.title) && this.props.enabled,
+          [styles.effectInvisiblePlanch]: !Boolean(this.props.title) || !this.props.enabled,
         })}>{this.props.title||this.lastTitle}{loadingCircle}</div>
         {links}
       </div>

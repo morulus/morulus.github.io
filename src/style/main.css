@@ -18,6 +18,17 @@ body {
 	min-height:100%;
 	font-size: 12px;
 
+	&.brahmascreens-purview-mode {
+		>div:first-child {
+			.screen {
+				cursor:pointer;
+				&.current {
+					box-shadow: -10px 12px 180px 0px rgba(41, 187, 122, 0.18);
+				}
+			}
+		}
+	}
+
 	@media screen and (min-width:960px) {
 		min-width:960px;
 		font-size: 18px;
@@ -95,6 +106,7 @@ body {
 	background-repeat: no-repeat;
 	background-color:transparent;
 	background-size:cover;
+	transition:box-shadow 1s ease;
 }
 
 #screens .screen > article {
@@ -142,27 +154,16 @@ body {
 	color:#00429a;
 }
 
-#screens .screen > article h1 {
-	color:rgb(255,255,255);
-	font-family: 'Lato', "Arial";
-	font-size:82px;
-	font-weight:100;
-	display: block;
-	width: auto;
-	text-align: center;
-	margin:40px 0 5px 0;
-}
-
 #screens .screen > article h1.black {
 	color:rgb(36, 36, 36);
 	font-weight: 400;
 	text-shadow: 0px 3px 2px rgba(255,255,255,0.8);
 }
 
-#screens .screen > article h2 {
+#screens .screen > article h1 {
 	color:white;
 	font-family: 'Lato', "Arial";
-	font-size:2.8em;
+	font-size:4em;
 	font-weight:600;
 	display: block;
 	width: auto;
@@ -170,14 +171,24 @@ body {
 	margin:40px 0 60px 0;
 	line-height:40px;
 	text-shadow: 0 0 4px rgba(255, 255, 255, 0.74);
-	margin:0 0 0.3em 0;
+	margin:0 0 0 0;
 }
 
-#screens .screen > article h2.glamo {
+#screens .screen > article h1.glamo {
 	color:rgb(0, 0, 0);
 	font-size:120px;
 }
 
+#screens .screen > article h2 {
+	color:rgb(255,255,255);
+	font-family: 'Lato', "Arial";
+	font-size:5em;
+	font-weight:100;
+	display: block;
+	width: auto;
+	text-align: center;
+	margin:40px 0 5px 0;
+}
 
 #screens .screen > article h3 {
 	color: $subscribeColor;
@@ -192,14 +203,14 @@ body {
     letter-spacing: 2px;
 }
 
-#screens .screen > article h2.black {
+#screens .screen > article h1.black {
 	color:rgb(26, 26, 26);
 	font-weight: 400;
 	font-size:56px;
 	text-shadow: 0px 3px 2px rgba(255,255,255,0.8);
 }
 
-#screens .screen > article h2.strong {
+#screens .screen > article h1.strong {
 	text-shadow: 0px 3px 2px #000;
 	font-weight: 400;
 }
@@ -258,6 +269,10 @@ body {
 	color:white;
 	font-weight:100;
 	font-size:1.2em;
+}
+
+#screens .screen > article section {
+	margin-bottom:1.25em;
 }
 
 .representation {

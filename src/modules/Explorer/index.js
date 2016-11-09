@@ -59,13 +59,13 @@ export default function explorer(url) {
   return function(screen) {
     var explorer = new UrlExplorer(this.node[0], url, this.provider.dispatch.bind(this.provider));
 
-    this.on('beforeEnter', ()=>{
+    this.on('active', ()=>{
       explorer.trottleDispatch({
         type: 'beforeEnter'
       });
     });
 
-    this.on('leave', function() {
+    this.on('unactive', function() {
       explorer.trottleDispatch({
         type: 'leave'
       });
