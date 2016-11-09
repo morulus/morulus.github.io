@@ -16,7 +16,7 @@ export default {
 	},
 	'ENABLE_SCORE': function(source, provider) {
 		return source
-		.do(() => {
+		.map(() => {
 			return provider.actions.assignState({
         score: Object.assign(provider.getState().score, {
 					enabled: true
@@ -26,7 +26,7 @@ export default {
 	},
 	'DISABLE_SCORE': function(source, provider) {
 		return source
-		.do(() => {
+		.map(() => {
 			return provider.actions.assignState({
         score: Object.assign(provider.getState().score, {
 					enabled: false
@@ -34,10 +34,22 @@ export default {
       });
 		});
 	},
+	'RESET_SCORE': function(source, provider) {
+		return source
+		.map(() => {
+			return provider.actions.assignState({
+        score: {
+					title: false,
+					loading: false,
+					enabled: true,
+					links: {}
+				}
+      });
+		});
+	},
 	'START_LOADING': function(source, provider) {
 		return source
 		.map(() => {
-      console.log('START_LOADING');
 			return provider.actions.assignState({
         score: Object.assign(provider.getState().score, {
 					loading: true

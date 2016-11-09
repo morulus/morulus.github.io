@@ -57,7 +57,7 @@ export default function layerCake(config = {}) {
     },
     onLeave: function() {
       this.provider.dispatch({
-        type: 'DISABLE_SCORE'
+        type: 'RESET_SCORE'
       });
     }
   });

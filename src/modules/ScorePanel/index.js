@@ -15,6 +15,11 @@ function followLinkFactory(link) {
 class ScorePanel extends Component {
   constructor(...args) {
     super(...args);
+    this.lastTitle = '';
+  }
+
+  componentWillReceiveProps(props) {
+
   }
 
   render() {
@@ -55,16 +60,30 @@ class ScorePanel extends Component {
     }
 
 
-    return <div className={classnames({
-      [styles.infoBlock]: true,
-      [styles.effectVisible]: this.props.enabled
+    const html = <div className={classnames({
+      [styles.infoBlock]: true
     })}>
       <div>
-        <div className={styles.standaloneIcon}><span><i className="fa fa-th"></i></span></div>
-        <div className={styles.title}>{this.props.title}{loadingCircle}</div>
+        <a href="javascript:void(0)" className={classnames({
+          [styles.effectVisibleWhirl]: this.props.enabled,
+          [styles.effectInvisibleWhirl]: !this.props.enabled,
+          [styles.standaloneIcon]: true
+        })} onClick={this.props.togglePurview}><span><i className="fa fa-th"></i></span></a>
+        <div className={classnames({
+          [styles.title]: true,
+          [styles.effectVisiblePlanch]: Boolean(this.props.title),
+          [styles.effectInvisiblePlanch]: !Boolean(this.props.title),
+        })}>{this.props.title||this.lastTitle}{loadingCircle}</div>
         {links}
       </div>
     </div>;
+
+    /* Memorize title */
+    if (this.props.title) {
+      this.lastTitle = this.props.title;
+    }
+
+    return html;
   }
 }
 
@@ -74,11 +93,22 @@ class ScorePanel extends Component {
 function mapStateToProps(state) {
   return {
     dispos: state.currentScreen, // Current screen coords
-    enabled: state.score.enabled,
+    enabled: state.score.enabled && !state.purview.enabled,
     loading: state.score.loading,
     title: state.score.title,
     links: state.score.links||{}
   }
 }
 
-export default connect(mapStateToProps)(ScorePanel);
+function mapDispatchToProps(dispatch) {
+  return {
+    togglePurview: () => {
+      dispatch({
+        type: 'ACTION_TOGGLE_PURVIEW'
+      });
+
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScorePanel);

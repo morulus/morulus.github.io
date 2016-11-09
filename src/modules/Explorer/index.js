@@ -69,8 +69,12 @@ export default function explorer(url) {
       explorer.trottleDispatch({
         type: 'leave'
       });
-
     });
 
+    if (this.active) {
+      explorer.trottleDispatch({
+        type: 'beforeEnter'
+      });
+    }
   }
 }

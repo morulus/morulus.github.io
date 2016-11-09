@@ -42,23 +42,23 @@
   </body>
   <script>
 
-    const screens = new me.Widescreens(document.getElementById('screens'));
+    const widget = new me.Widescreens(document.getElementById('screens'));
     vendor('morulus/ScorePanel', function(ScorePanel) {
       var scorePanel = ReactDOM.render(React.createElement(ScorePanel, {
-        store: screens
+        store: widget
       }), document.getElementById("cover"));
     });
 
-    window.screens = screens;
+    window.widget = widget;
 
     // Portfolio
-    screens.addScreen(4, 0, '/screens/start/start.js');
+    widget.addScreen(4, 0, '/screens/start/start.js');
 
     // Portfolio
-    screens.addScreen(4, 1, {
+    widget.addScreen(4, 1, {
       html: '<article><div><h1>Portfolio</h1></div></article>'
-    });
+    }, true);
     // Wedding party
-    screens.addScreen(5, 1, '/screens/weddingparty/weddingparty.js');
+    widget.addScreen(5, 1, '/screens/weddingparty/weddingparty.js');
   </script>
 </html>

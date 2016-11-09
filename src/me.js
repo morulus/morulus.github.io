@@ -25,9 +25,9 @@ window.ReactDOM = ReactDOM;
 
 const defaultState = {
 	score: {
-		enabled: false,
+		enabled: true,
 		loading: false,
-		title: 'Hello, World'
+		title: false
 	}
 }
 

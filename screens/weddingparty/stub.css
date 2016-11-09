@@ -1,5 +1,9 @@
 .weddingparty {
-  background:url('./stub.jpg') center top no-repeat #fff !important;
+  background-image: url(./stub.jpg), url(./fill.jpg);
+  background-position: center top, center top !important;
+  background-repeat: no-repeat, repeat-x !important;
+  background-size: auto !important;
+  background-color: white !important;
 }
 
 .wedding-party-wrapper {

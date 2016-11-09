@@ -34,8 +34,8 @@
 }
 
 :local(.infoBlock) {
+  display:block;
   width: 300px;
-  display:none;
   margin-top: 12px;
   margin-left: 12px;
   >div {
@@ -122,14 +122,27 @@
   background-color: transparent;
 }
 
-:local(.effectVisible) {
-  display:table;
-  >div {
+:local(.effectVisiblePlanch) {
+  transition:transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: perspective(900px) rotateX(-0deg);
+}
 
-    animation-name: present;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  }
+:local(.effectInvisiblePlanch) {
+  transform-origin:50% 50%;
+  transition:transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: perspective(900px) rotateX(-270deg);
+  background-color:#bfcecb;
+}
+
+:local(.effectVisibleWhirl) {
+  transition:transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transform: perspective(900px) rotateZ(-0deg);
+}
+
+:local(.effectInvisibleWhirl) {
+  transform-origin:50% 50%;
+  transition:transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  transform: perspective(900px) rotateZ(-270deg) scale(0.01);
 }
 
 
