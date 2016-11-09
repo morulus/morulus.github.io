@@ -1,0 +1,11 @@
+.solomki {
+  background-color: rgb(255, 107, 9) !important;
+  background-image: linear-gradient(rgba(47, 47, 47, 0.24)1px,rgba(255,255,255,0)1px),linear-gradient(90deg,rgba(0, 0, 0, 0.34)1px,rgba(255,255,255,0)1px),linear-gradient(rgba(255,255,255,.035)1px,rgba(255,255,255,0)1px),linear-gradient(90deg,rgba(255,255,255,.035)1px,rgba(255,255,255,0)1px)  !important;
+  background-size: 8.3333% 100px,8.3333% 100px,8.3333% 100px,8.3333% 100px  !important;
+  background-position: -1px -1px  !important;
+  background-repeat: repeat !important;
+}
+
+.solomki >div:first-child {
+  background:url(./stub.png) center center no-repeat transparent;
+}

@@ -27,14 +27,15 @@
 
     window.widget = widget;
 
-    // Portfolio
+    // Start screen
     widget.addScreen(4, 0, '/screens/start/start.js');
-
     // Portfolio
     widget.addScreen(4, 1, {
-      html: '<article><div><h2>Portfolio</h2></div></article>'
+      html: '<article><div><h2>Portfolio</h2><summary>Use keyboard to navigate</summary></div></article>'
     }, true);
     // Wedding party
     widget.addScreen(5, 1, '/screens/weddingparty/weddingparty.js');
+    // Solomki
+    widget.addScreen(6, 1, '/screens/solomki/solomki.js');
   </script>
 </html>
