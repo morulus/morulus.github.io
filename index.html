@@ -12,13 +12,16 @@
   </head>
   <body>
     <div id="screens" data-dirty>
-      <!-- <img src="assets/images/brahmajsavatar.png" class="screen-effect-trinket" alt="" /> -->
+      <!--  -->
     </div>
     <div id="cover"></div>
   </body>
   <script>
 
-    const widget = new me.Widescreens(document.getElementById('screens'));
+    const widget = new me.Widescreens(document.getElementById('screens'), {
+      purview: true,
+      easing: 'ease'
+    });
     vendor('morulus/ScorePanel', function(ScorePanel) {
       var scorePanel = ReactDOM.render(React.createElement(ScorePanel, {
         store: widget
@@ -28,14 +31,24 @@
     window.widget = widget;
 
     // Start screen
-    widget.addScreen(4, 0, '/screens/start/start.js');
+    widget.addScreen(4, 4, '/screens/start/start.js', true);
+    // widget.addScreen(5, 4, {
+    //   html: '<article><div><h2>Contacts</h2></div></article>'
+    // });
+
     // Portfolio
-    widget.addScreen(4, 1, {
+    widget.addScreen(4, 6, {
       html: '<article><div><h2>Portfolio</h2><summary>Use keyboard to navigate</summary></div></article>'
-    }, true);
+    });
     // Wedding party
-    widget.addScreen(5, 1, '/screens/weddingparty/weddingparty.js');
+    widget.addScreen(4, 5, '/screens/weddingparty/weddingparty.js');
     // Solomki
-    widget.addScreen(6, 1, '/screens/solomki/solomki.js');
+    widget.addScreen(4, 3, '/screens/secondstep/secondstep.js');
+    widget.addScreen(5, 3, '/screens/solomki/solomki.js');
+    widget.addScreen(3, 4, '/screens/weddingparty/weddingparty.js');
+    widget.addScreen(5, 4, '/screens/weddingparty/weddingparty.js');
+    widget.addScreen(3, 3, '/screens/solomki/solomki.js');
+    widget.addScreen(3, 5, '/screens/solomki/solomki.js');
+    widget.addScreen(5, 5, '/screens/solomki/solomki.js');
   </script>
 </html>

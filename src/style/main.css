@@ -7,7 +7,9 @@ $linkActiveColor: #39e297;
 $subscribeColor: #667180;
 
 body {
-	background-color:black;
+	background-color: #000000;
+	/*background-image: url(/assets/images/haos-circle-move.png);*/
+	background-position: center center;
 	padding:0px;
 	margin:0px;
 }
@@ -22,8 +24,13 @@ body {
 		>div:first-child {
 			.screen {
 				cursor:pointer;
-				&.current {
+				transition:transform 0.65s ease;
+				transform:perspective(3000px);
+				&.current.startscreen {
 					box-shadow: -10px 12px 180px 0px rgba(41, 187, 122, 0.18);
+				}
+				&:hover {
+					transform:perspective(3000px) rotateX(180deg)
 				}
 			}
 		}
@@ -107,6 +114,7 @@ body {
 	background-color:transparent;
 	background-size:cover;
 	transition:box-shadow 1s ease;
+	overflow:hidden;
 }
 
 #screens .screen > article {
@@ -182,7 +190,7 @@ body {
 #screens .screen > article h2 {
 	color:rgb(255,255,255);
 	font-family: 'Lato', "Arial";
-	font-size:5em;
+	font-size:9em;
 	font-weight:100;
 	display: block;
 	width: auto;

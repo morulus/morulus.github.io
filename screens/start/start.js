@@ -1,8 +1,9 @@
 define(['./template.html'], function(template) {
   return {
     html: template,
-    css: {
-      backgroundImage: 'url(assets/images/blackscreen-bg.jpg)'
-    }
+    className: 'startscreen'//,
+    // css: {
+    //   backgroundImage: 'url(assets/images/blackscreen-bg.jpg)'
+    // }
   }
 });
