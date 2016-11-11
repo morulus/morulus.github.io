@@ -29,17 +29,21 @@
     });
 
     window.widget = widget;
-
+    widget.addScreen(4, 0, {
+      html: '<article><div><h1>A long time ago in a galaxy far far away</h1></div></article>'
+    });
+    widget.addScreen(4, 1, {
+      html: '<article><div><h2></h2></div></article>'
+    });
     // Start screen
-    widget.addScreen(4, 4, '/screens/start/start.js', true);
+    widget.addScreen(4, 2, '/screens/start/start.js', true);
     // widget.addScreen(5, 4, {
     //   html: '<article><div><h2>Contacts</h2></div></article>'
     // });
-
-    // Portfolio
-    widget.addScreen(4, 6, {
-      html: '<article><div><h2>Portfolio</h2><summary>Use keyboard to navigate</summary></div></article>'
+    widget.addScreen(4, 4, {
+      html: '<article><div><h2>Portfolio</h2></div></article>'
     });
+
     // Wedding party
     widget.addScreen(4, 5, '/screens/weddingparty/weddingparty.js');
     // Solomki
@@ -50,5 +54,11 @@
     widget.addScreen(3, 3, '/screens/solomki/solomki.js');
     widget.addScreen(3, 5, '/screens/solomki/solomki.js');
     widget.addScreen(5, 5, '/screens/solomki/solomki.js');
+
+    // Portfolio
+    widget.addScreen(4, 6, {
+      html: '<article><div><h2>Projects</h2></div></article>'
+    });
+    widget.addScreen(4, 7, '/screens/solomki/solomki.js');
   </script>
 </html>

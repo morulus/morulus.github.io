@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/main.css';
 import Widget from '/Users/VladimirMorulus/WorkAreas/mahabra/morulus/brahmascreens/src/Widget.js';
-import layerCake from './modules/layerCake/index';
+import layerCake from './modules/layerCake/';
 import explorer from './modules/explorer/index';
 import ScorePanel from './modules/ScorePanel/index';
 import middlewares from './middlewares/score';

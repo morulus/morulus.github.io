@@ -24,14 +24,11 @@ body {
 		>div:first-child {
 			.screen {
 				cursor:pointer;
-				transition:transform 0.65s ease;
-				transform:perspective(3000px);
+				
 				&.current.startscreen {
 					box-shadow: -10px 12px 180px 0px rgba(41, 187, 122, 0.18);
 				}
-				&:hover {
-					transform:perspective(3000px) rotateX(180deg)
-				}
+
 			}
 		}
 	}

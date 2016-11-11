@@ -1,4 +1,4 @@
-.secondstep {
+.secondstep >div:first-child {
   background:url(./secondstep.jpg) top center no-repeat white;
   background-size:100% auto;
 }

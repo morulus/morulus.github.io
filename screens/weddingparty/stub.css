@@ -1,4 +1,4 @@
-.weddingparty {
+.weddingparty >div:first-child {
   background-image: url(./stub.jpg), url(./fill.jpg);
   background-position: center top, center top !important;
   background-repeat: no-repeat, repeat-x !important;
