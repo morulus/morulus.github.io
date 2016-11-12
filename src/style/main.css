@@ -24,7 +24,7 @@ body {
 		>div:first-child {
 			.screen {
 				cursor:pointer;
-				
+
 				&.current.startscreen {
 					box-shadow: -10px 12px 180px 0px rgba(41, 187, 122, 0.18);
 				}
@@ -168,13 +168,13 @@ body {
 #screens .screen > article h1 {
 	color:white;
 	font-family: 'Lato', "Arial";
-	font-size:4em;
+	font-size:7em;
 	font-weight:600;
 	display: block;
 	width: auto;
 	text-align: center;
 	margin:40px 0 60px 0;
-	line-height:40px;
+	line-height:auto;
 	text-shadow: 0 0 4px rgba(255, 255, 255, 0.74);
 	margin:0 0 0 0;
 }
@@ -192,7 +192,7 @@ body {
 	display: block;
 	width: auto;
 	text-align: center;
-	margin:40px 0 5px 0;
+	margin:0 auto;
 }
 
 #screens .screen > article h3 {

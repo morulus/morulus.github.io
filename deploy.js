@@ -3,7 +3,7 @@ url = require("url"),
 fs = require('fs'),
 path = require('path'),
 here = process.cwd() ,
-extTypes = { 
+extTypes = {
 		"3gp"   : "video/3gpp"
 		, "a"     : "application/octet-stream"
 		, "ai"    : "application/postscript"
@@ -193,7 +193,7 @@ dispenser = function(response, status, data) {
 			contentType = 'text/plain';
 			content = 'Not found';
 		break;
-		
+
 		case 200:
 			statusCode=200;
 			contentType = data['Content-Type']||'text/plain';
@@ -206,7 +206,7 @@ dispenser = function(response, status, data) {
 			content = 'Server error';
 		break;
 	}
-	
+
 	 response.writeHead(status, {
 	 	"Content-Type": contentType,
 	 	"Access-Control-Allow-Origin": "*"
@@ -248,16 +248,20 @@ redirect = function(response, pathname) {
 			});
 		} else {
 			// 404
-			dispenser(response, 404);
+			// dispenser(response, 404);
+			/*
+			Trying to get index.html
+			*/
+			redirect(response, path.dirname(pathname)+'/index.html');
 		}
 	});
 },
 router = function(request, response) {
 	var pathname = here+url.parse(request.url).pathname;
 	redirect(response, pathname);
-	
+
 },
-port=process.argv[2]||4002.
+port=process.argv[2]||8001.
 http.createServer(function(request, response) {
  	router(request, response);
 }).listen(port, '127.0.0.1');

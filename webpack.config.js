@@ -51,7 +51,7 @@ module.exports = {
     return [postcsssimplevars, autoprefixer, postcssnested, postcssFor];
   },
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "./"),
     publicPath: "/",
     filename: "bundle.js",
     libraryTarget: 'this',

@@ -6,12 +6,11 @@ define(['morulus/explorer', 'morulus/layerCake', './stub.css'], function(explore
 		middle: explorer('https://morulus.github.io/demo-solomki/'),
 		upper: '',
 		cover: {
-			title: "Arcade game \"Solomki\"",
+			title: "Игра в \"Соломки\"",
 			descript: "",
 			links: {}
 		},
 		origin: {
-			name: 'SolomkiArcadeGame',
 			strokeColor: '#fff',
 			className: 'solomki'
 		}

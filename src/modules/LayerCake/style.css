@@ -103,12 +103,12 @@
   :local(.coverWrapper) {
     display:block;
     transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s linear;
-    transform:perspective(5000px) rotateX(-0deg);
+    transform:rotateX(-0deg);
   }
 
   :local(.lower) {
     transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform:perspective(5000px) translate3d(0,0,-1px) rotateX(-180deg);
+    transform:translate3d(0,0,-1px) rotateX(-180deg);
   }
 
   &:hover {
@@ -116,12 +116,12 @@
     :local(.coverWrapper) {
       background-color:rgba(10, 58, 19, 0.93);
       transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-      transform:perspective(5000px) rotateX(-180deg)
+      transform:rotateX(-180deg)
     }
 
     :local(.lower) {
       transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-      transform:perspective(5000px) translate3d(0,0,1px) rotateX(-360deg)
+      transform:translate3d(0,0,1px) rotateX(-360deg)
     }
   }
 }
