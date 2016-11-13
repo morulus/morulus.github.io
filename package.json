@@ -1,6 +1,6 @@
 {
   "name": "morulus",
-  "version": "0.1.4",
+  "version": "0.1.5a",
   "description": "My home page",
   "main": "index.js",
   "scripts": {
