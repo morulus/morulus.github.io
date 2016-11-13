@@ -194,3 +194,58 @@
 		-moz-transform:scale(.3);
 	}
 }
+
+.TransparentTheme {
+  background-color:transparent !important;
+  color:black !important;
+}
+
+.TransparentTheme > div >div >h3,
+.TransparentTheme > div >div >descript {
+  background-color:white;
+  position: relative !important;
+}
+
+
+
+
+
+.TransparentTheme > div >div >h3:before,
+.TransparentTheme > div >div >descript:before {
+  border-top: 62px solid transparent;
+  border-right: 22px solid white;
+  content: "";
+  display: inline-block;
+  vertical-align: auto;
+  vertical-align: bottom;
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  right: 100%;
+}
+
+.TransparentTheme > div >div >h3:after,
+.TransparentTheme > div >div >descript:after {
+  border-bottom: 62px solid transparent;
+  border-left: 22px solid white;
+  content: "";
+  display: inline-block;
+  vertical-align: auto;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  left: 100%;
+}
+
+.TransparentTheme > div >div >h3:before {
+  border-top: 1.3em solid transparent;
+  border-right: 40px solid white;
+}
+
+.TransparentTheme > div >div >h3:after {
+  border-bottom: 1.3em solid transparent;
+  border-left: 40px solid white;
+}

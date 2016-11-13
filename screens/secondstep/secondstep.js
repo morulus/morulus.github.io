@@ -6,14 +6,15 @@ define(['morulus/explorer', 'morulus/layerCake', './stub.css'], function(explore
 		middle: explorer('http://first-ep.ru/'),
 		upper: '',
 		cover: {
-			title: "Parallax mini-game \"Сhick in jungle\"",
-			descript: "",
+			title: "Цепленок в джунглях",
+			descript: "Мини-игра как интерфейс к промо-сайту проекта Secondstep.ru",
+			stack: ["Параллакс", "Спрайтовая анимация", "Горизонтальный скроллинг"],
 			links: {}
 		},
 		origin: {
 			name: 'Secondstep',
 			strokeColor: '#fff',
-			className: 'secondstep'
+			className: 'secondstep asMetroDesign'
 		}
 	});
 });

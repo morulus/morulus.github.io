@@ -55,11 +55,18 @@ export default function layerCake(config = {}) {
         }
       });
 
-      // Render supercover
-      ReactDOM.render(React.createElement(Cover, {
-          widget: this,
-          store: this.provider
-      }), store.dom.cover);
+      if (config.cover) {
+        if (config.cover.className) {
+          store.dom.coverWrapper.classList.add(config.cover.className);
+        }
+
+        // Render supercover
+        ReactDOM.render(React.createElement(Cover, {
+            widget: this,
+            cover: config.cover,
+            store: this.provider
+        }), store.dom.cover);
+      }
     },
     onEnter: function() {
       if (config.cover) {
@@ -76,7 +83,11 @@ export default function layerCake(config = {}) {
     }
   });
 
+
   if ("object"===typeof config.cover) {
+    /**
+     * Import title from cover
+     */
     if (config.cover.title) {
       screenConfiguration.title = config.cover.title;
     }

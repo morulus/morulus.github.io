@@ -1,4 +1,4 @@
-define(['morulus/explorer', 'morulus/layerCake', './stub.css'], function(explorer, layerCake) {
+define(['morulus/explorer', 'morulus/layerCake', './stub.html', './stub.css'], function(explorer, layerCake, html) {
 	var location = this.location;
 
 	return layerCake({
@@ -7,12 +7,13 @@ define(['morulus/explorer', 'morulus/layerCake', './stub.css'], function(explore
 		upper: '',
 		cover: {
 			title: "Игра в \"Соломки\"",
-			descript: "",
-			links: {}
+			descript: "Сразитесь в неравной битве с котом Матроскиным по вытягиванию соломок в рамках проекта \"Деревня дества\" Простоквашино",
+			links: {},
+			stack: ['SVG','Game logic','Animation']
 		},
 		origin: {
 			strokeColor: '#fff',
-			className: 'solomki'
+			className: 'solomki asMetroDesign'
 		}
 	});
 });

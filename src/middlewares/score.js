@@ -61,7 +61,6 @@ export default {
 
 		return source
 		.map(() => {
-      console.log('END lOADING');
 			return provider.actions.assignState({
         score: Object.assign(provider.getState().score, {
 					loading: false
@@ -72,10 +71,19 @@ export default {
 	'CANCEL_LOADING': function(source, provider) {
 		return source
 		.map(() => {
-      console.log('CANCEL lOADING');
 			return provider.actions.assignState({
         score: Object.assign(provider.getState().score, {
 					loading: false
+				})
+      });
+		});
+	},
+	'COVER_STATE': function(source, provider) {
+		return source
+		.map((action) => {
+			return provider.actions.assignState({
+        cover: Object.assign(provider.getState().cover, {
+					state: action.state
 				})
       });
 		});

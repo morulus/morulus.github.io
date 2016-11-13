@@ -2,6 +2,7 @@ const $last = Symbol();
 
 class UrlExplorer {
   constructor(node, src, dispatch) {
+
     this.node = node;
     this.src = src;
     this.providerDispatch = dispatch;
@@ -57,7 +58,7 @@ class UrlExplorer {
 
 export default function explorer(url) {
   return function(screen) {
-    var explorer = new UrlExplorer(this.node[0], url, this.provider.dispatch.bind(this.provider));
+    var explorer = new UrlExplorer(screen, url, this.provider.dispatch.bind(this.provider));
 
     this.on('active', ()=>{
       explorer.trottleDispatch({

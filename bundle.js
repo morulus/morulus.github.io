@@ -76,11 +76,11 @@ this["me"] =
 
 	var _layerCake2 = _interopRequireDefault(_layerCake);
 
-	var _index = __webpack_require__(320);
+	var _index = __webpack_require__(322);
 
 	var _index2 = _interopRequireDefault(_index);
 
-	var _index3 = __webpack_require__(321);
+	var _index3 = __webpack_require__(323);
 
 	var _index4 = _interopRequireDefault(_index3);
 
@@ -108,6 +108,26 @@ this["me"] =
 		exports: _index4.default
 	});
 
+	function defaultCompare(a, b) {
+		return a === b;
+	}
+
+	function distinct(selector, customCompare) {
+		var defaultLast = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+
+		var compare = customCompare || defaultCompare;
+		return function distinctFilter(handler) {
+			var last = defaultLast;
+			return function subscriber(state) {
+				var selected = selector(state);
+				if (!compare(selected, last)) {
+					last = selected;
+					handler(selected);
+				}
+			};
+		};
+	}
+
 	// Side globals
 	window.React = _react2.default;
 	window.ReactDOM = _reactDom2.default;
@@ -117,8 +137,18 @@ this["me"] =
 			enabled: true,
 			loading: false,
 			title: false
+		},
+		cover: {
+			state: 'normal'
 		}
 	};
+
+	/**
+	* Selector for cover state
+	*/
+	function coverStateSelector(state) {
+		return state.cover.state;
+	}
 
 	var Me = function (_Widget) {
 		_inherits(Me, _Widget);
@@ -126,7 +156,23 @@ this["me"] =
 		function Me(selector, config) {
 			_classCallCheck(this, Me);
 
-			return _possibleConstructorReturn(this, (Me.__proto__ || Object.getPrototypeOf(Me)).call(this, selector, config, defaultState, _score2.default));
+			/**
+	   * Listen for state
+	   */
+			var _this = _possibleConstructorReturn(this, (Me.__proto__ || Object.getPrototypeOf(Me)).call(this, selector, config, defaultState, _score2.default));
+
+			var onCoverStateChange = distinct(coverStateSelector)(function (state) {
+				$(_this.selector).removeClass('coverMinimized');
+				switch (state) {
+					case 'minimized':
+						$(_this.selector).addClass('coverMinimized');
+						break;
+				}
+			});
+			_this.subscribe(function (state) {
+				return onCoverStateChange(state);
+			});
+			return _this;
 		}
 
 		return Me;
@@ -27068,7 +27114,7 @@ this["me"] =
 	    var x = action.x,
 	        y = action.y,
 	        state = _this.getState(),
-	        patch = state.purview.enabled ? "rotateX(" + (action.extra.rotateX || 25) + "deg) scale(" + state.config.purviewScale + ")" : "",
+	        patch = state.purview.enabled ? "rotateX(" + (action.extra.rotateX || 0) + "deg) scale(" + state.config.purviewScale + ")" : "",
 	        transform = (state.purview.enabled ? "perspective(3000px)" : "") + " " + patch + " translate3D(" + (x + state.shift.x * 100 + state.advshift.x) + "%," + (y + state.shift.y * 100 + state.advshift.y) + "%,0)";
 
 	    $(_this.htmlElements.screensWrapper).css({ "animation-play-state": 'paused' });
@@ -30247,11 +30293,18 @@ this["me"] =
 	        }
 	      });
 
-	      // Render supercover
-	      ReactDOM.render(React.createElement(_Cover2.default, {
-	        widget: this,
-	        store: this.provider
-	      }), store.dom.cover);
+	      if (config.cover) {
+	        if (config.cover.className) {
+	          store.dom.coverWrapper.classList.add(config.cover.className);
+	        }
+
+	        // Render supercover
+	        ReactDOM.render(React.createElement(_Cover2.default, {
+	          widget: this,
+	          cover: config.cover,
+	          store: this.provider
+	        }), store.dom.cover);
+	      }
 	    },
 	    onEnter: function onEnter() {
 	      if (config.cover) {
@@ -30269,6 +30322,9 @@ this["me"] =
 	  });
 
 	  if ("object" === _typeof(config.cover)) {
+	    /**
+	     * Import title from cover
+	     */
 	    if (config.cover.title) {
 	      screenConfiguration.title = config.cover.title;
 	    }
@@ -30312,7 +30368,7 @@ this["me"] =
 
 
 	// module
-	exports.push([module.id, "@-webkit-keyframes rotateFrom90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n}\n\n@keyframes rotateFrom90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n}\n\n@-webkit-keyframes rotateTo90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n}\n\n@keyframes rotateTo90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n}\n\n._2G_1-kh6YaHr-KTFNPNYa4 {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n}\n\n._3gxlPyp0Kg08AQD1Bu2onY {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n}\n\n\n.S1fvBkiEuQiVoQvIUuF2x {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:1%;\n}\n\n\n.S1fvBkiEuQiVoQvIUuF2x >div {\n  width:100%;\n  height:100%;\n  position: absolute;\n  left:0px;\n  top:0px;\n}\n\n\n._39PAOzW-hvFGJAjzKpmkzH h3 {\n  text-align: center;\n  font-family: Roboto;\n  color: white;\n  font-size: 4em;\n  font-weight: 200;\n  top: 50%;\n  position: absolute;\n  -webkit-transform: translateY(-50%);\n  -ms-transform: translateY(-50%);\n  transform: translateY(-50%);\n  width: 100%;\n  margin: 0;\n}\n\n#screens .screen .dQ4BkSv-dM7AVKL4MaVB5 {\n  display:none;\n  background-color: rgba(0, 121, 22, 0.93);\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n  -webkit-transition:height 0.45s ease;\n  transition:height 0.45s ease;\n}\n\n/*transform:translateY(0%);*/\n\n#screens .screen .dQ4BkSv-dM7AVKL4MaVB5 >div {\n  width:100%;\n  height:100%;\n  position: absolute;\n  left:0px;\n  top:0px;\n}\n/*\n#screens .screen {\n  &:hover {\n    :local(.coverWrapper) {\n        transform:translateY(100%);\n    }\n  }\n}*/\n\n#screens.brahmascreens-purview-mode .screen {\n  overflow:visible;\n  -webkit-transform-style: preserve-3d;\n          transform-style: preserve-3d;\n}\n\n#screens.brahmascreens-purview-mode .screen .dQ4BkSv-dM7AVKL4MaVB5 {\n  display:block;\n  -webkit-transition:background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s linear;\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform:rotateX(-0deg);\n  transform:rotateX(-0deg);\n}\n\n#screens.brahmascreens-purview-mode .screen ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transition:-webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:-webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform:translate3d(0,0,-1px) rotateX(-180deg);\n  transform:translate3d(0,0,-1px) rotateX(-180deg);\n}\n\n#screens.brahmascreens-purview-mode .screen:hover {\n  z-index:1;\n}\n\n#screens.brahmascreens-purview-mode .screen:hover .dQ4BkSv-dM7AVKL4MaVB5 {\n  background-color:rgba(10, 58, 19, 0.93);\n  -webkit-transition:background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  -webkit-transform:rotateX(-180deg);\n  transform:rotateX(-180deg)\n}\n\n#screens.brahmascreens-purview-mode .screen:hover ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transition:-webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:-webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  -webkit-transform:translate3d(0,0,1px) rotateX(-360deg);\n  transform:translate3d(0,0,1px) rotateX(-360deg)\n}\n\n#screens .screen.current .dQ4BkSv-dM7AVKL4MaVB5 {\n      /*transform:translateY(100%);*/\n    height:100%;\n\n}\n", ""]);
+	exports.push([module.id, "@-webkit-keyframes rotateFrom90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n}\n\n@keyframes rotateFrom90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n}\n\n@-webkit-keyframes rotateTo90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n}\n\n@keyframes rotateTo90 {\n  0% {\n    -webkit-transform:perspective(3000px) rotateX(0deg);\n            transform:perspective(3000px) rotateX(0deg);\n  }\n  50% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n  100% {\n    -webkit-transform:perspective(3000px) rotateX(90deg);\n            transform:perspective(3000px) rotateX(90deg);\n  }\n}\n\n._2G_1-kh6YaHr-KTFNPNYa4 {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n}\n\n._3gxlPyp0Kg08AQD1Bu2onY {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n}\n\n\n.S1fvBkiEuQiVoQvIUuF2x {\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:1%;\n}\n\n\n.S1fvBkiEuQiVoQvIUuF2x >div {\n  width:100%;\n  height:100%;\n  position: absolute;\n  left:0px;\n  top:0px;\n}\n\n\n._39PAOzW-hvFGJAjzKpmkzH transition:\n  h3 {\n  text-align: center;\n  font-family: Roboto;\n  color: white;\n  font-size: 4em;\n  font-weight: 400;\n  position: absolute;\n  width: 100%;\n  margin: 0;\n}\n\n#screens .screen .dQ4BkSv-dM7AVKL4MaVB5 {\n  display:block;\n  background-color: rgba(0, 121, 22, 0.93);\n  position: absolute;\n  top:0;\n  left:0;\n  width:100%;\n  height:100%;\n  -webkit-transition:height 0.45s ease;\n  transition:height 0.45s ease;\n}\n\n/*transform:translateY(0%);*/\n\n#screens .screen .dQ4BkSv-dM7AVKL4MaVB5 >div {\n  width:100%;\n  height:100%;\n  position: absolute;\n  left:0px;\n  top:0px;\n}\n/*\n#screens .screen {\n  &:hover {\n    :local(.coverWrapper) {\n        transform:translateY(100%);\n    }\n  }\n}*/\n\n#screens .screen {\n  overflow:hidden;\n}\n\n#screens .screen.asMetroDesign ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transition:-webkit-transform 0.5s ease;\n  transition:-webkit-transform 0.5s ease;\n  transition:transform 0.5s ease;\n  transition:transform 0.5s ease, -webkit-transform 0.5s ease;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 {\n  background-color: #007d16;\n  color:white;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0px;\n  top: 0px;\n  font-family: \"Roboto\";\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 50px 80px;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div h3 {\n  text-align: left;\n  color: inherit;\n  font-size: 4.5em;\n  font-weight: 400;\n  width: auto;\n  margin: 0 0 40px 0;\n  -webkit-transform: none;\n  -ms-transform: none;\n  transform: none;\n  display:table;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div descript {\n  font-size: 2.5em;\n  color: inherit;\n  font-weight: 100;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div ul {\n  color: white;\n  font-size: 2.1em;\n  font-family: Roboto;\n  margin: 20 0 0 0;\n  list-style: none;\n  padding: 0;\n  display: block;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div ul >li {\n  display: inline-block;\n  margin-right: 20px;\n  background-color: black;\n  padding: 0 10px;\n  position: relative;\n  margin-bottom: 4px;\n  white-space: nowrap;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div ul >li:before {\n  border-top: 50px solid transparent;\n  border-right: 11px solid black;\n  content: \"\";\n  display: inline-block;\n  vertical-align: auto;\n  vertical-align: bottom;\n  position: absolute;\n  top: 0;\n  width: 0;\n  height: 0;\n  right: 100%;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div ul >li:after {\n  border-bottom: 50px solid transparent;\n  border-left: 11px solid black;\n  content: \"\";\n  display: inline-block;\n  vertical-align: auto;\n  vertical-align: bottom;\n  position: absolute;\n  top: 0;\n  width: 0;\n  height: 0;\n  left: 100%;\n}\n\n#screens .screen.asMetroDesign .dQ4BkSv-dM7AVKL4MaVB5 >div >div >button {\n  font-size: 3em;\n  border: 0;\n  background: #29bb7a;\n  color: white;\n  padding: 5px 30px;\n  margin: 20px 0;\n}\n\n#screens.brahmascreens-purview-mode .screen.asMetroDesign ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transform: scale(2.5);\n  -ms-transform: scale(2.5);\n  transform: scale(2.5);\n  -webkit-filter: blur(0px);\n  filter: blur(0px);\n}\n\n#screens.brahmascreens-purview-mode .screen {\n  -webkit-transform-style: preserve-3d;\n          transform-style: preserve-3d;\n  box-sizing: border-box;\n  border: 10px rgba(0, 0, 0, 0) solid;\n}\n\n#screens.brahmascreens-purview-mode .screen .dQ4BkSv-dM7AVKL4MaVB5 {\n  display:block;\n}\n\n#screens.brahmascreens-purview-mode .screen.rotationalEffect .dQ4BkSv-dM7AVKL4MaVB5 {\n  display:block;\n  -webkit-transition:background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s linear;\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s linear, -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform:rotateX(-0deg);\n  transform:rotateX(-0deg);\n}\n\n#screens.brahmascreens-purview-mode .screen.rotationalEffect ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transition:-webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:-webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform:translate3d(0,0,-1px) rotateX(-180deg);\n  transform:translate3d(0,0,-1px) rotateX(-180deg);\n}\n\n#screens.brahmascreens-purview-mode .screen.rotationalEffect:hover {\n  z-index:1;\n}\n\n#screens.brahmascreens-purview-mode .screen.rotationalEffect:hover .dQ4BkSv-dM7AVKL4MaVB5 {\n  background-color:rgba(10, 58, 19, 0.93);\n  -webkit-transition:background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  -webkit-transform:rotateX(-180deg);\n  transform:rotateX(-180deg)\n}\n\n#screens.brahmascreens-purview-mode .screen.rotationalEffect:hover ._2G_1-kh6YaHr-KTFNPNYa4 {\n  -webkit-transition:-webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:-webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  transition:transform 1s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 1s cubic-bezier(0.77, 0, 0.175, 1);\n  -webkit-transform:translate3d(0,0,1px) rotateX(-360deg);\n  transform:translate3d(0,0,1px) rotateX(-360deg)\n}\n\n#screens .screen.current .dQ4BkSv-dM7AVKL4MaVB5 {\n      /*transform:translateY(100%);*/\n    height:100%;\n\n}\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -30341,11 +30397,17 @@ this["me"] =
 
 	var _reactRedux = __webpack_require__(296);
 
+	var _classnames = __webpack_require__(320);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
 	var _style = __webpack_require__(293);
 
 	var _style2 = _interopRequireDefault(_style);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30357,21 +30419,56 @@ this["me"] =
 	  _inherits(Cover, _Component);
 
 	  function Cover() {
+	    var _ref;
+
 	    _classCallCheck(this, Cover);
 
-	    return _possibleConstructorReturn(this, (Cover.__proto__ || Object.getPrototypeOf(Cover)).apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_ref = Cover.__proto__ || Object.getPrototypeOf(Cover)).call.apply(_ref, [this].concat(args)));
+
+	    _this.state = {
+	      minimized: true
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Cover, [{
 	    key: 'render',
 	    value: function render() {
+	      var _Object$assign;
+
 	      return _react2.default.createElement(
 	        'div',
-	        { className: _style2.default.cover },
+	        { className: (0, _classnames2.default)(Object.assign((_Object$assign = {}, _defineProperty(_Object$assign, _style2.default.cover, true), _defineProperty(_Object$assign, _style2.default.coverMinimize, this.props.minimized), _Object$assign), this.props.cover.className ? _defineProperty({}, this.props.cover.className, true) : {})) },
 	        _react2.default.createElement(
 	          'h3',
 	          null,
-	          this.props.widget.summary.title
+	          this.props.cover.title
+	        ),
+	        _react2.default.createElement(
+	          'descript',
+	          null,
+	          this.props.cover.descript
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          (this.props.cover.stack || []).map(function (stack) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: stack },
+	              stack
+	            );
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.props.minimize.bind(this) },
+	          '\u0414\u0435\u043C\u043E ',
+	          _react2.default.createElement('i', { className: 'fa fa-eye' })
 	        )
 	      );
 	    }
@@ -30381,10 +30478,23 @@ this["me"] =
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-	  return {};
+	  return {
+	    minimized: state.cover.state === 'minimized'
+	  };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cover);
+	function mapDispatchToProps(dispatch) {
+	  return {
+	    minimize: function minimize() {
+	      dispatch({
+	        type: 'COVER_STATE',
+	        state: 'minimized'
+	      });
+	    }
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Cover);
 	module.exports = exports['default'];
 
 /***/ },
@@ -32046,6 +32156,71 @@ this["me"] =
 
 /***/ },
 /* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames() {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg === 'undefined' ? 'undefined' : _typeof(arg);
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if ("function" === 'function' && _typeof(__webpack_require__(321)) === 'object' && __webpack_require__(321)) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	})();
+
+/***/ },
+/* 321 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ },
+/* 322 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32131,7 +32306,7 @@ this["me"] =
 
 	function explorer(url) {
 	  return function (screen) {
-	    var explorer = new UrlExplorer(this.node[0], url, this.provider.dispatch.bind(this.provider));
+	    var explorer = new UrlExplorer(screen, url, this.provider.dispatch.bind(this.provider));
 
 	    this.on('active', function () {
 	      explorer.trottleDispatch({
@@ -32155,7 +32330,7 @@ this["me"] =
 	module.exports = exports['default'];
 
 /***/ },
-/* 321 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32166,11 +32341,11 @@ this["me"] =
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _style = __webpack_require__(322);
+	var _style = __webpack_require__(324);
 
 	var _style2 = _interopRequireDefault(_style);
 
-	var _classnames7 = __webpack_require__(324);
+	var _classnames7 = __webpack_require__(320);
 
 	var _classnames8 = _interopRequireDefault(_classnames7);
 
@@ -32334,13 +32509,13 @@ this["me"] =
 	module.exports = exports['default'];
 
 /***/ },
-/* 322 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(323);
+	var content = __webpack_require__(325);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(176)(content, {});
@@ -32360,7 +32535,7 @@ this["me"] =
 	}
 
 /***/ },
-/* 323 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(175)();
@@ -32368,7 +32543,7 @@ this["me"] =
 
 
 	// module
-	exports.push([module.id, "@-webkit-keyframes sk-circleFadeDelay {\n  0%, 39%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n}\n\n@keyframes sk-circleFadeDelay {\n  0%, 39%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n}\n\n@-webkit-keyframes present {\n  0% {\n    -webkit-transform: perspective(900px) rotateX(-90deg);\n            transform: perspective(900px) rotateX(-90deg);\n  }\n\n  100% {\n    -webkit-transform: perspective(900px) rotateX(0deg);\n            transform: perspective(900px) rotateX(0deg);\n  }\n}\n\n@keyframes present {\n  0% {\n    -webkit-transform: perspective(900px) rotateX(-90deg);\n            transform: perspective(900px) rotateX(-90deg);\n  }\n\n  100% {\n    -webkit-transform: perspective(900px) rotateX(0deg);\n            transform: perspective(900px) rotateX(0deg);\n  }\n}\n\n@-webkit-keyframes hideZoomed {\n  0% {\n    -webkit-transform:scale(1);\n            transform:scale(1);\n  }\n\n  30% {\n    -webkit-transform:scale(1.1);\n            transform:scale(1.1);\n  }\n\n  80% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:50px;\n  }\n\n  100% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:0px;\n  }\n}\n\n@keyframes hideZoomed {\n  0% {\n    -webkit-transform:scale(1);\n            transform:scale(1);\n  }\n\n  30% {\n    -webkit-transform:scale(1.1);\n            transform:scale(1.1);\n  }\n\n  80% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:50px;\n  }\n\n  100% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:0px;\n  }\n}\n\n._2npIL9TFVuVZi1QpauCKkx {\n  display:block;\n  width: 300px;\n  margin-top: 12px;\n  margin-left: 12px;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div { display:table; background-color: transparent; color: white; min-height: 50px; line-height: 50px; padding: 0 16px; border-radius: 1px; margin-bottom: 4px; font-size: 1.3em; font-family: Roboto;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* { border:0; outline:none; display: inline-block; vertical-align: top; min-height:50px; min-width:50px; margin-right: 5px;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span { display: inline-block; vertical-align: top; position:relative;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span >* { position: absolute; top:0; left:0;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span >* .fa { width: 48px; height: 50px; text-align: center; vertical-align: middle; line-height: 47px; color: #29bb7a;\n}\n\n._1RzwfAaokSuJ0FgPDm2jLb {\n  -webkit-animation: hideZoomed;\n          animation: hideZoomed;\n  -webkit-animation-duration: 0.5s;\n          animation-duration: 0.5s;\n  -webkit-animation-delay: 0.3s;\n          animation-delay: 0.3s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n\n._1RzwfAaokSuJ0FgPDm2jLb .visibleOnVisible { display:none;\n}\n\n._3muurey_C0y0xx-o3OXQsI {\n  -webkit-transition: -webkit-transform 0.3s ease;\n  transition: -webkit-transform 0.3s ease;\n  transition: transform 0.3s ease;\n  transition: transform 0.3s ease, -webkit-transform 0.3s ease;\n  -webkit-transform:scale(1);\n      -ms-transform:scale(1);\n          transform:scale(1);\n}\n\n._3muurey_C0y0xx-o3OXQsI .unvisibleOnVisible { display:none;\n}\n\n\n.Y8YbErIeQEZlf2dZqTCPc {\n  height: 48px;\n  display: inline-block;\n  padding: 0 25px 0 25px;\n  border: 1px transparent solid;\n  background-color: white;\n  color:black;\n  font-weight:bold;\n  border-radius: 25px;\n}\n\n.F5th5pDxEf2kmTuGxp05T {\n  height: 48px;\n  display: inline-block;\n  width: 48px;\n  border-radius: 50px;\n  border: 1px rgba(255, 255, 255, 0.36) solid;\n  margin-left: 10px;\n  margin-right: -25px;\n  margin-top: -1px;\n  background-color: transparent;\n}\n\n.CkJ6vBwtgOr1DjLIzaBm1 {\n  -webkit-transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform: perspective(900px) rotateX(-0deg);\n          transform: perspective(900px) rotateX(-0deg);\n}\n\n._3daEgQ36GU7ih0KAJ5rXy1 {\n  -webkit-transform-origin:50% 50%;\n      -ms-transform-origin:50% 50%;\n          transform-origin:50% 50%;\n  -webkit-transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform: perspective(900px) rotateX(-270deg);\n          transform: perspective(900px) rotateX(-270deg);\n  background-color:#bfcecb;\n}\n\n._2ixnabERXHDo9k94yb2Qd0 {\n  -webkit-transition: -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition:transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  -webkit-transform: perspective(900px) rotateZ(-0deg);\n          transform: perspective(900px) rotateZ(-0deg);\n}\n\n._1txpjCDJck6_MbF7y1rrsl {\n  -webkit-transform-origin:50% 50%;\n      -ms-transform-origin:50% 50%;\n          transform-origin:50% 50%;\n  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition:transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  -webkit-transform: perspective(900px) rotateZ(-270deg) scale(0.01);\n          transform: perspective(900px) rotateZ(-270deg) scale(0.01);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC {\n  width: 30px;\n  height: 30px;\n  margin: 9px;\n  position: relative;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle { width: 100%; height: 100%; position: absolute; left: 0; top: 0;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle:before { content: ''; display: block; margin: 0 auto; width: 15%; height: 15%; background-color: #29bb7a; border-radius: 100%; -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both; animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle2 { -webkit-transform: rotate(30deg); -ms-transform: rotate(30deg); transform: rotate(30deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle3 { -webkit-transform: rotate(60deg); -ms-transform: rotate(60deg); transform: rotate(60deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle4 { -webkit-transform: rotate(90deg); -ms-transform: rotate(90deg); transform: rotate(90deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle5 { -webkit-transform: rotate(120deg); -ms-transform: rotate(120deg); transform: rotate(120deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle6 { -webkit-transform: rotate(150deg); -ms-transform: rotate(150deg); transform: rotate(150deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle7 { -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle8 { -webkit-transform: rotate(210deg); -ms-transform: rotate(210deg); transform: rotate(210deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle9 { -webkit-transform: rotate(240deg); -ms-transform: rotate(240deg); transform: rotate(240deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle10 { -webkit-transform: rotate(270deg); -ms-transform: rotate(270deg); transform: rotate(270deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle11 { -webkit-transform: rotate(300deg); -ms-transform: rotate(300deg); transform: rotate(300deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle12 { -webkit-transform: rotate(330deg); -ms-transform: rotate(330deg); transform: rotate(330deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle2:before { -webkit-animation-delay: -1.1s; animation-delay: -1.1s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle3:before { -webkit-animation-delay: -1s; animation-delay: -1s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle4:before { -webkit-animation-delay: -0.9s; animation-delay: -0.9s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle5:before { -webkit-animation-delay: -0.8s; animation-delay: -0.8s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle6:before { -webkit-animation-delay: -0.7s; animation-delay: -0.7s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle7:before { -webkit-animation-delay: -0.6s; animation-delay: -0.6s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle8:before { -webkit-animation-delay: -0.5s; animation-delay: -0.5s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle9:before { -webkit-animation-delay: -0.4s; animation-delay: -0.4s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle10:before { -webkit-animation-delay: -0.3s; animation-delay: -0.3s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle11:before { -webkit-animation-delay: -0.2s; animation-delay: -0.2s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle12:before { -webkit-animation-delay: -0.1s; animation-delay: -0.1s;\n}\n\n._1tCj4yl12RF9DvrdfXyTtb {\n  border: 1px transparent solid;\n  background-color: white;\n  border-radius: 25px;\n}\n\n._1tCj4yl12RF9DvrdfXyTtb .fa { width: 50px; height: 50px; text-align: center; vertical-align: middle; line-height: 52px; color: #29bb7a;\n}\n", ""]);
+	exports.push([module.id, "@-webkit-keyframes sk-circleFadeDelay {\n  0%, 39%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n}\n\n@keyframes sk-circleFadeDelay {\n  0%, 39%, 100% { opacity: 0; }\n  40% { opacity: 1; }\n}\n\n@-webkit-keyframes present {\n  0% {\n    -webkit-transform: perspective(900px) rotateX(-90deg);\n            transform: perspective(900px) rotateX(-90deg);\n  }\n\n  100% {\n    -webkit-transform: perspective(900px) rotateX(0deg);\n            transform: perspective(900px) rotateX(0deg);\n  }\n}\n\n@keyframes present {\n  0% {\n    -webkit-transform: perspective(900px) rotateX(-90deg);\n            transform: perspective(900px) rotateX(-90deg);\n  }\n\n  100% {\n    -webkit-transform: perspective(900px) rotateX(0deg);\n            transform: perspective(900px) rotateX(0deg);\n  }\n}\n\n@-webkit-keyframes hideZoomed {\n  0% {\n    -webkit-transform:scale(1);\n            transform:scale(1);\n  }\n\n  30% {\n    -webkit-transform:scale(1.1);\n            transform:scale(1.1);\n  }\n\n  80% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:50px;\n  }\n\n  100% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:0px;\n  }\n}\n\n@keyframes hideZoomed {\n  0% {\n    -webkit-transform:scale(1);\n            transform:scale(1);\n  }\n\n  30% {\n    -webkit-transform:scale(1.1);\n            transform:scale(1.1);\n  }\n\n  80% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:50px;\n  }\n\n  100% {\n    -webkit-transform:scale(0.01);\n            transform:scale(0.01);\n    width:0px;\n  }\n}\n\n._2npIL9TFVuVZi1QpauCKkx {\n  display:block;\n  width: 300px;\n  margin:0;\n  background-color:white;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div { display:table; background-color: white; color: white; min-height: 50px; line-height: 50px; padding: 0; border-radius: 1px; margin-bottom: 4px; font-size: 1.3em; font-family: Roboto;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* { border:0; outline:none; display: inline-block; vertical-align: top; min-height:50px; min-width:50px; margin-right: 5px;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span { display: inline-block; vertical-align: top; position:relative;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span >* { position: absolute; top:0; left:0;\n}\n\n._2npIL9TFVuVZi1QpauCKkx >div >* >span >* .fa { width: 48px; height: 50px; text-align: center; vertical-align: middle; line-height: 47px; color: #29bb7a;\n}\n\n._1RzwfAaokSuJ0FgPDm2jLb {\n  -webkit-animation: hideZoomed;\n          animation: hideZoomed;\n  -webkit-animation-duration: 0.5s;\n          animation-duration: 0.5s;\n  -webkit-animation-delay: 0.3s;\n          animation-delay: 0.3s;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n\n._1RzwfAaokSuJ0FgPDm2jLb .visibleOnVisible { display:none;\n}\n\n._3muurey_C0y0xx-o3OXQsI {\n  -webkit-transition: -webkit-transform 0.3s ease;\n  transition: -webkit-transform 0.3s ease;\n  transition: transform 0.3s ease;\n  transition: transform 0.3s ease, -webkit-transform 0.3s ease;\n  -webkit-transform:scale(1);\n      -ms-transform:scale(1);\n          transform:scale(1);\n}\n\n._3muurey_C0y0xx-o3OXQsI .unvisibleOnVisible { display:none;\n}\n\n\n.Y8YbErIeQEZlf2dZqTCPc {\n  height: 48px;\n  display: inline-block;\n  padding: 0 25px 0 25px;\n  border: 1px transparent solid;\n  background-color: white;\n  color:black;\n  font-weight:bold;\n  border-radius: 25px;\n}\n\n.F5th5pDxEf2kmTuGxp05T {\n  height: 48px;\n  display: inline-block;\n  width: 48px;\n  border-radius: 50px;\n  border: 1px rgba(255, 255, 255, 0.36) solid;\n  margin-left: 10px;\n  margin-right: -25px;\n  margin-top: -1px;\n  background-color: transparent;\n}\n\n.CkJ6vBwtgOr1DjLIzaBm1 {\n  -webkit-transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform: perspective(900px) rotateX(-0deg);\n          transform: perspective(900px) rotateX(-0deg);\n}\n\n._3daEgQ36GU7ih0KAJ5rXy1 {\n  -webkit-transform-origin:50% 50%;\n      -ms-transform-origin:50% 50%;\n          transform-origin:50% 50%;\n  -webkit-transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  transition:transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  -webkit-transform: perspective(900px) rotateX(-270deg);\n          transform: perspective(900px) rotateX(-270deg);\n  background-color:#bfcecb;\n}\n\n._2ixnabERXHDo9k94yb2Qd0 {\n  -webkit-transition: -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition:transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.75s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  -webkit-transform: perspective(900px) rotateZ(-0deg);\n          transform: perspective(900px) rotateZ(-0deg);\n}\n\n._1txpjCDJck6_MbF7y1rrsl {\n  -webkit-transform-origin:50% 50%;\n      -ms-transform-origin:50% 50%;\n          transform-origin:50% 50%;\n  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition: transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  transition:transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  -webkit-transform: perspective(900px) rotateZ(-270deg) scale(0.01);\n          transform: perspective(900px) rotateZ(-270deg) scale(0.01);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC {\n  width: 30px;\n  height: 30px;\n  margin: 9px;\n  position: relative;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle { width: 100%; height: 100%; position: absolute; left: 0; top: 0;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle:before { content: ''; display: block; margin: 0 auto; width: 15%; height: 15%; background-color: #29bb7a; border-radius: 100%; -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both; animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle2 { -webkit-transform: rotate(30deg); -ms-transform: rotate(30deg); transform: rotate(30deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle3 { -webkit-transform: rotate(60deg); -ms-transform: rotate(60deg); transform: rotate(60deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle4 { -webkit-transform: rotate(90deg); -ms-transform: rotate(90deg); transform: rotate(90deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle5 { -webkit-transform: rotate(120deg); -ms-transform: rotate(120deg); transform: rotate(120deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle6 { -webkit-transform: rotate(150deg); -ms-transform: rotate(150deg); transform: rotate(150deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle7 { -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle8 { -webkit-transform: rotate(210deg); -ms-transform: rotate(210deg); transform: rotate(210deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle9 { -webkit-transform: rotate(240deg); -ms-transform: rotate(240deg); transform: rotate(240deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle10 { -webkit-transform: rotate(270deg); -ms-transform: rotate(270deg); transform: rotate(270deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle11 { -webkit-transform: rotate(300deg); -ms-transform: rotate(300deg); transform: rotate(300deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle12 { -webkit-transform: rotate(330deg); -ms-transform: rotate(330deg); transform: rotate(330deg);\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle2:before { -webkit-animation-delay: -1.1s; animation-delay: -1.1s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle3:before { -webkit-animation-delay: -1s; animation-delay: -1s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle4:before { -webkit-animation-delay: -0.9s; animation-delay: -0.9s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle5:before { -webkit-animation-delay: -0.8s; animation-delay: -0.8s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle6:before { -webkit-animation-delay: -0.7s; animation-delay: -0.7s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle7:before { -webkit-animation-delay: -0.6s; animation-delay: -0.6s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle8:before { -webkit-animation-delay: -0.5s; animation-delay: -0.5s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle9:before { -webkit-animation-delay: -0.4s; animation-delay: -0.4s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle10:before { -webkit-animation-delay: -0.3s; animation-delay: -0.3s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle11:before { -webkit-animation-delay: -0.2s; animation-delay: -0.2s;\n}\n\n\n._119O8_8y5vlTXWKtXxdIeC .sk-circle12:before { -webkit-animation-delay: -0.1s; animation-delay: -0.1s;\n}\n\n._1tCj4yl12RF9DvrdfXyTtb {\n  border: 1px transparent solid;\n  background-color: white;\n  border-radius: 25px;\n}\n\n._1tCj4yl12RF9DvrdfXyTtb .fa { width: 50px; height: 50px; text-align: center; vertical-align: middle; line-height: 52px; color: #29bb7a;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -32384,71 +32559,6 @@ this["me"] =
 		"loading": "_119O8_8y5vlTXWKtXxdIeC",
 		"standaloneIcon": "_1tCj4yl12RF9DvrdfXyTtb"
 	};
-
-/***/ },
-/* 324 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-
-	(function () {
-		'use strict';
-
-		var hasOwn = {}.hasOwnProperty;
-
-		function classNames() {
-			var classes = [];
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg === 'undefined' ? 'undefined' : _typeof(arg);
-
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-
-			return classes.join(' ');
-		}
-
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if ("function" === 'function' && _typeof(__webpack_require__(325)) === 'object' && __webpack_require__(325)) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	})();
-
-/***/ },
-/* 325 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
 /* 326 */
@@ -32515,7 +32625,6 @@ this["me"] =
 		'END_LOADING': function END_LOADING(source, provider) {
 
 			return source.map(function () {
-				console.log('END lOADING');
 				return provider.actions.assignState({
 					score: Object.assign(provider.getState().score, {
 						loading: false
@@ -32525,10 +32634,18 @@ this["me"] =
 		},
 		'CANCEL_LOADING': function CANCEL_LOADING(source, provider) {
 			return source.map(function () {
-				console.log('CANCEL lOADING');
 				return provider.actions.assignState({
 					score: Object.assign(provider.getState().score, {
 						loading: false
+					})
+				});
+			});
+		},
+		'COVER_STATE': function COVER_STATE(source, provider) {
+			return source.map(function (action) {
+				return provider.actions.assignState({
+					cover: Object.assign(provider.getState().cover, {
+						state: action.state
 					})
 				});
 			});

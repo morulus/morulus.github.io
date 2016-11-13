@@ -36,15 +36,15 @@
 :local(.infoBlock) {
   display:block;
   width: 300px;
-  margin-top: 12px;
-  margin-left: 12px;
+  margin:0;
+  background-color:white;
   >div {
     display:table;
-    background-color: transparent;
+    background-color: white;
     color: white;
     min-height: 50px;
     line-height: 50px;
-    padding: 0 16px;
+    padding: 0;
     border-radius: 1px;
     margin-bottom: 4px;
 
