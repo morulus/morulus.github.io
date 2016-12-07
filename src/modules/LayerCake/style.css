@@ -103,6 +103,8 @@
       transition:transform 0.5s ease;
     }
     :local(.coverWrapper) {
+      transition:transform 1s ease;
+      transform-origin:5% 0%;
       background-color: #007d16;
       color:white;
       >div {
@@ -196,6 +198,15 @@
     }
   }
 }
+
+#screens.coverMinimized .screen {
+  &.asMetroDesign {
+    :local(.coverWrapper) {
+      transform:scale(0.01) rotateX(-359deg);
+    }
+  }
+}
+
 
 #screens.brahmascreens-purview-mode .screen {
   &.asMetroDesign {

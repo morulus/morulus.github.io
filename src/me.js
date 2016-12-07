@@ -60,6 +60,13 @@ function coverStateSelector(state) {
 	return state.cover.state;
 }
 
+/**
+* Selector for something change with view state
+*/
+function viewStateSelector(state) {
+	return state.currentScreen[0]+','+state.currentScreen[1]+','+String(state.purview.enabled);
+}
+
 class Me extends Widget {
 	constructor(selector, config) {
 		super(selector, config, defaultState, middlewares);
@@ -75,7 +82,19 @@ class Me extends Widget {
 					break;
 				}
 		 });
-		this.subscribe((state) => onCoverStateChange(state));
+		this.subscribe(onCoverStateChange);
+		/**
+		 * Listen for screen change or purview change
+		 */
+
+		let onSomeViewChanged = distinct(viewStateSelector)((state) => {
+			this.dispatch({
+        type: 'COVER_STATE',
+        state: 'normal'
+      });
+		});
+
+		this.subscribe(onSomeViewChanged);
 	}
 }
 

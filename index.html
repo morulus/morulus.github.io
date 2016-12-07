@@ -30,29 +30,29 @@
     });
 
     window.widget = widget;
-    widget.addScreen([4, 0], {
-      html: '<article><div><h1>A long time ago in a galaxy far far away</h1></div></article>'
-    });
-    widget.addScreen([4, 1], {
-      html: ''
-    });
-    widget.addScreen([4, 2], '/screens/start/start.js', true);
-    widget.addScreen([4, 3], {
-      html: ''
-    });
+    // widget.addScreen([4, 0], {
+    //   html: '<article><div><h1>A long time ago in a galaxy far far away</h1></div></article>'
+    // });
+    // widget.addScreen([4, 1], {
+    //   html: ''
+    // });
+    // widget.addScreen([4, 2], '/screens/start/start.js', true);
+    // widget.addScreen([4, 3], {
+    //   html: ''
+    // });
+    //
+    //
+    // widget.addPage('portfolio', [4, 5], {
+    //   html: '<article><div><h2>Portfolio</h2></div></article>'
+    // });
 
-
-    widget.addPage('portfolio', [4, 5], {
-      html: '<article><div><h2>Portfolio</h2></div></article>'
-    });
-
-    widget.addPage('WeddingParty', [4, 6], '/screens/weddingparty/weddingparty.js');
-    widget.addPage('SecondStep', [4, 4], '/screens/secondstep/secondstep.js');
-    widget.addPage('Solomki', [5, 4], '/screens/solomki/solomki.js');
-    widget.addScreen([4, 7, 0], {
-      html: '<article><div><h2>Projects</h2></div></article>'
-    });
-    widget.addPage('Solomki4', [4, 8], '/screens/solomki/solomki.js');
+    widget.addPage('WeddingParty', [4, 6], '/screens/weddingparty/weddingparty.js', true);
+    // widget.addPage('SecondStep', [4, 4], '/screens/secondstep/secondstep.js');
+    // widget.addPage('Solomki', [5, 4], '/screens/solomki/solomki.js');
+    // widget.addScreen([4, 7, 0], {
+    //   html: '<article><div><h2>Projects</h2></div></article>'
+    // });
+    // widget.addPage('Solomki4', [4, 8], '/screens/solomki/solomki.js');
 
 
     function handleUri(uri) {
