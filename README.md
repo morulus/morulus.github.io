@@ -3,7 +3,7 @@ Vladimir Kalmykov
 
 Высококвалифицированный веб-разработчик, программист, дизайнер, архитектор программного обеспечения.
 
-Мои публикации на Medium
+Публикации на Medium
 --
 
 [Проволочки при проектировании структуры React приложения](https://medium.com/@vladimirmorulus/%D0%BF%D1%80%D0%BE%D0%B2%D0%BE%D0%BB%D0%BE%D1%87%D0%BA%D0%B8-%D0%BF%D1%80%D0%B8-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B-react-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-609f80105e2c)
@@ -18,7 +18,12 @@ Vladimir Kalmykov
 
 [Кастомные атрибуты в React или 5 золотых правил как получить валидность атрибута](https://medium.com/@vladimirmorulus/%D0%BA%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D1%8B%D0%B5-%D0%B0%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%D1%8B-%D0%B2-react-%D0%B8%D0%BB%D0%B8-5-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D1%8B%D1%85-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB-%D0%BA%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%B2%D0%B0%D0%BB%D0%B8%D0%B4%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B0%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%D0%B0-a22fc97be60b)
 
-Мои публикации на npm
+Видео
+--
+
+[Митап по DDD и DDS в Redux приложении в компании Infotech Group](https://www.youtube.com/watch?v=U8ZYaurjWPI)
+
+Публикации на npmjs.org
 --
 
 [stringify-object-extract-functions](https://www.npmjs.com/package/stringify-object-extract-functions)
@@ -124,7 +129,57 @@ Loader для webpack, позволяющий получить информац�
 
 Простая в использовании утилита, позволяющая отследить нажатие любой клавиши в CLI
 
-Доклады
+Утилиты на bash
 --
 
-[Митап по DDD и DDS в Redux приложении в компании Infotech Group](https://www.youtube.com/watch?v=U8ZYaurjWPI)
+https://github.com/morulus/resolve-up.bash - Утилита для MacOs, написанная на bash, для поиска файлов в старших директориях
+
+Экспериментальные проекты
+--
+
+https://github.com/morulus/quart - Хелпер для написания плагинов для Сhrome
+
+https://github.com/morulus/reactive-middleware - Попытка наложить реактивную парадигму на паттерн store
+
+https://github.com/morulus/vendor - Альтернатива RequireJs
+
+https://github.com/morulus/promiseFactory - Конфигурируемый синтетический Promise
+
+Gists
+--
+
+Very lite http server
+https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
+
+
+
+Демо страницы
+--
+
+### brahma.screens
+
+Полноэкранный слайдер на jQuery
+
+[![brahma.screens](./assets/demos/brahma.screens.jpg)](http://morulus.github.io/brahma.screens/)
+
+Демо: http://morulus.github.io/brahma.screens/
+Исходник: https://github.com/morulus/brahma.screens
+
+### weddingparty
+
+Спрайтовая (покадровая) анимация и движение по кривым Безье
+
+[![brahma.screens](./assets/demos/weddingparty.jpg)](https://morulus.github.io/demo-weddingparty/)
+
+Демо: https://morulus.github.io/demo-weddingparty/
+Исходник: https://github.com/morulus/demo-weddingparty
+Статья: [Как я разрабатывал скрипт анимации перемещения элемента по кривой Безье на Javascript](https://medium.com/@vladimirmorulus/%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BF%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BB%D0%BE%D0%BA%D0%B0-%D0%B2-html-6198b8612183?source=your_stories_page---------------------------)
+
+### demo-solomki
+
+Простая казуальная игра на Javascript и SVG
+
+[![brahma.screens](./assets/demos/solomki.jpg)](https://morulus.github.io/demo-solomki/)
+
+Демо: https://morulus.github.io/demo-solomki/
+Исходник: https://github.com/morulus/demo-solomki
