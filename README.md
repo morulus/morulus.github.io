@@ -1,11 +1,11 @@
 Vladimir Kalmykov
 ==
 
+![morulus.github.io](./assets/morulus.github.iox256.png)
+
 Программист, дизайнер, архитектор и инженер программного обеспечения.
 
-Мои социальные страницы:
-
-[LinkedIn](https://www.linkedin.com/in/vladimirkalmykov/) | [Github](https://github.com/morulus) | [Twitter](https://twitter.com/Morulus) | [Facebook](https://www.facebook.com/luciusmorulus) | [Codepen](https://codepen.io/morulus)
+[Github](https://github.com/morulus) | [Twitter](https://twitter.com/Morulus) | [Codepen](https://codepen.io/morulus) | [LinkedIn](https://www.linkedin.com/in/vladimirkalmykov/) | [Facebook](https://www.facebook.com/luciusmorulus)
 
 Публикации на Medium
 --
