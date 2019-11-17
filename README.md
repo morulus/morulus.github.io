@@ -27,7 +27,7 @@ Vladimir Kalmykov
 
 [Митап по DDD и DDS в Redux приложении в компании Infotech Group](https://www.youtube.com/watch?v=U8ZYaurjWPI)
 
-Публикации на npmjs.org
+Пакеты npmjs.org
 --
 
 [stringify-object-extract-functions](https://www.npmjs.com/package/stringify-object-extract-functions)
@@ -133,7 +133,7 @@ Loader для webpack, позволяющий получить информац�
 
 Простая в использовании утилита, позволяющая отследить нажатие любой клавиши в CLI
 
-Утилиты на bash
+Утилиты
 --
 
 https://github.com/morulus/resolve-up.bash - Утилита для MacOs, написанная на bash, для поиска файлов в старших директориях
