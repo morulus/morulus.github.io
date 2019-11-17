@@ -1,7 +1,11 @@
 Vladimir Kalmykov
 ==
 
-Высококвалифицированный веб-разработчик, программист, дизайнер, архитектор программного обеспечения.
+Программист, дизайнер, архитектор и инженер программного обеспечения.
+
+Мои социальные страницы:
+
+[LinkedIn](https://www.linkedin.com/in/vladimirkalmykov/) | [Github](https://github.com/morulus) | [Twitter](https://twitter.com/Morulus) | [Facebook](https://www.facebook.com/luciusmorulus) | [Codepen](https://codepen.io/morulus)
 
 Публикации на Medium
 --
@@ -153,10 +157,10 @@ https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
 
 
 
-Демо страницы
+Демо
 --
 
-### brahma.screens
+### brahma.screens (2015)
 
 Полноэкранный слайдер на jQuery
 
@@ -165,7 +169,7 @@ https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
 Демо: http://morulus.github.io/brahma.screens/
 Исходник: https://github.com/morulus/brahma.screens
 
-### weddingparty
+### weddingparty (2016)
 
 Спрайтовая (покадровая) анимация и движение по кривым Безье
 
@@ -175,7 +179,7 @@ https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
 Исходник: https://github.com/morulus/demo-weddingparty
 Статья: [Как я разрабатывал скрипт анимации перемещения элемента по кривой Безье на Javascript](https://medium.com/@vladimirmorulus/%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BF%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B1%D0%BB%D0%BE%D0%BA%D0%B0-%D0%B2-html-6198b8612183?source=your_stories_page---------------------------)
 
-### demo-solomki
+### demo-solomki (2014)
 
 Простая казуальная игра на Javascript и SVG
 
@@ -183,3 +187,11 @@ https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
 
 Демо: https://morulus.github.io/demo-solomki/
 Исходник: https://github.com/morulus/demo-solomki
+
+
+### brahma.cartoon (2015)
+
+[![brahma.cartoon](./assets/demos/brahma.cartoon.jpg)](https://morulus.github.io/brahma.cartoon/)
+
+Демо: https://morulus.github.io/brahma.cartoon/
+Исходник: https://github.com/morulus/brahma.cartoon

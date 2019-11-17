@@ -1,3 +1,0 @@
-- [Прототипирование](./prototyping/index.md)
-- Операции с DOM
-- jQuery
