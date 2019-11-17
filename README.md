@@ -27,8 +27,6 @@ Vladimir Kalmykov
 
 [Митап по DDD и DDS в Redux приложении в компании Infotech Group](https://www.youtube.com/watch?v=U8ZYaurjWPI)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U8ZYaurjWPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 Публикации на npmjs.org
 --
 
