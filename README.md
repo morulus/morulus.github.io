@@ -27,6 +27,8 @@ Vladimir Kalmykov
 
 [Митап по DDD и DDS в Redux приложении в компании Infotech Group](https://www.youtube.com/watch?v=U8ZYaurjWPI)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U8ZYaurjWPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Публикации на npmjs.org
 --
 
@@ -183,15 +185,11 @@ https://gist.github.com/morulus/9cb31a62743814274113ffaa3a49fa8f
 
 Простая казуальная игра на Javascript и SVG
 
-[![brahma.screens](./assets/demos/solomki.jpg)](https://morulus.github.io/demo-solomki/)
-
 Демо: https://morulus.github.io/demo-solomki/
 Исходник: https://github.com/morulus/demo-solomki
 
 
 ### brahma.cartoon (2015)
-
-[![brahma.cartoon](./assets/demos/brahma.cartoon.jpg)](https://morulus.github.io/brahma.cartoon/)
 
 Демо: https://morulus.github.io/brahma.cartoon/
 Исходник: https://github.com/morulus/brahma.cartoon
